@@ -1,13 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 	"unicode"
 )
-
-// braille var should be here
-//var x string = `this is
 
 func stringToBraille(s string) (string, string, string) {
 
@@ -50,12 +49,13 @@ func stringToBraille(s string) (string, string, string) {
 }
 
 func printBraille(top, middle, bottom string) {
-	length_of_row := 130 // len of row with 10 Braille symbols(130)
+	// len of row with 10 Braille symbols(130)
+	length_of_row := 130
 	loop_count := len(top) / length_of_row
 	first_index := 0
 
 	for i := 1; i <= loop_count; i++ {
-		//println(i)
+
 		fmt.Println(strings.Trim(top[first_index:length_of_row], "[]"))
 		fmt.Println(strings.Trim(middle[first_index:length_of_row], "[]"))
 		fmt.Println(strings.Trim(bottom[first_index:length_of_row], "[]"))
@@ -65,25 +65,30 @@ func printBraille(top, middle, bottom string) {
 		length_of_row += 130
 
 	}
-	// запустить если не четное
-	fmt.Println(strings.Trim(top[first_index:], "[]"))
-	fmt.Println(strings.Trim(middle[first_index:], "[]"))
-	fmt.Println(strings.Trim(bottom[first_index:], "[]"))
-	fmt.Printf("\n")
 
+	if len(top)%130 != 0 {
+
+		fmt.Println(strings.Trim(top[first_index:], "[]"))
+		fmt.Println(strings.Trim(middle[first_index:], "[]"))
+		fmt.Println(strings.Trim(bottom[first_index:], "[]"))
+		fmt.Printf("\n")
+	}
 }
 
 func main() {
 
-	var s_input string
+	//"The Quick Brown Fox, Jumps Over A Lazy Dog."
 
-	fmt.Print("Enter your name: ")
-	fmt.Scanf("%s", &s_input)
-	fmt.Println(s_input)
+	fmt.Println("English to Braille.")
+	fmt.Print("Enter text (A-Z a-z . ,): ")
 
-	//s := "The Quick Brown Fox, Jumps Over A Ly Dog."
+	// input
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
 
-	t, m, b := stringToBraille(s_input)
+	t, m, b := stringToBraille(scanner.Text())
+
+	fmt.Print("\n")
+
 	printBraille(t, m, b)
-
 }
