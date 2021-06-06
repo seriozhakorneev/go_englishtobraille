@@ -63,7 +63,6 @@ func printBraille(top, middle, bottom string) {
 
 		first_index += 130
 		length_of_row += 130
-
 	}
 
 	if len(top)%130 != 0 {
@@ -82,13 +81,11 @@ func main() {
 	fmt.Println("English to Braille.")
 	fmt.Print("Enter text (A-Z a-z . ,): ")
 
-	// input
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 
 	t, m, b := stringToBraille(scanner.Text())
 
 	fmt.Print("\n")
-
 	printBraille(t, m, b)
 }
