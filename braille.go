@@ -75,17 +75,20 @@ func printBraille(top, middle, bottom string) {
 }
 
 func main() {
-
-	//"The Quick Brown Fox, Jumps Over A Lazy Dog."
-
 	fmt.Println("English to Braille.")
-	fmt.Print("Enter text (A-Z a-z . ,): ")
 
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
+	for {
+		fmt.Print("Enter text (A-Z a-z . , ex1t): ")
 
-	t, m, b := stringToBraille(scanner.Text())
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
 
-	fmt.Print("\n")
-	printBraille(t, m, b)
+		if scanner.Text() == "ex1t" {
+			break
+		}
+		t, m, b := stringToBraille(scanner.Text())
+
+		fmt.Print("\n")
+		printBraille(t, m, b)
+	}
 }
