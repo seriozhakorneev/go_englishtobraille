@@ -1,9 +1,7 @@
 package main
 
 import (
-	"log"
 	"net/http"
-	"os"
 	"strings"
 	"text/template"
 	"unicode"
@@ -12,7 +10,7 @@ import (
 var tpl *template.Template
 
 func init() {
-	tpl = template.Must(template.ParseGlob("templates/*gohtml")) // change all html to gohtml
+	tpl = template.Must(template.ParseGlob("templates/*gohtml"))
 }
 
 type Braille struct {
@@ -81,20 +79,10 @@ func getText(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleRequest() {
-	/*
-		// local
-		http.HandleFunc("/", index)
-		http.HandleFunc("/getText", getText)
-		http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-		http.ListenAndServe(":8080", nil)
-	*/
-	// deploy
-	port := os.Getenv("PORT")
 	http.HandleFunc("/", index)
 	http.HandleFunc("/getText", getText)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	log.Print("Listening on :" + port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	http.ListenAndServe(":8080", nil)
 }
 
 func main() {
