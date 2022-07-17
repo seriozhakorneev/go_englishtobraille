@@ -8,7 +8,6 @@ import (
 	"unicode"
 )
 
-// TODO: Refactor this?
 func stringToBraille(s string) (top string, middle string, bottom string) {
 	for _, letter := range s {
 		// add capitalized letter symbol
@@ -35,7 +34,7 @@ func stringToBraille(s string) (top string, middle string, bottom string) {
 func printBraille(s string) {
 	top, middle, bottom := stringToBraille(s)
 
-	// len of row with 10 Braille symbols(130)
+	//len of row with 10 Braille symbols(130)
 	lengthOfRow := 130
 	firstIndex := 0
 	for i := 1; i <= len(top)/lengthOfRow; i++ {
@@ -50,7 +49,6 @@ func printBraille(s string) {
 	}
 
 	if len(top)%130 != 0 {
-
 		fmt.Println(strings.Trim(top[firstIndex:], "[]"))
 		fmt.Println(strings.Trim(middle[firstIndex:], "[]"))
 		fmt.Println(strings.Trim(bottom[firstIndex:], "[]"))
@@ -61,6 +59,7 @@ func printBraille(s string) {
 func cliFlow() {
 	for {
 		fmt.Print("Enter text (A-Z a-z . , ex1t): ")
+
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
 		if scanner.Text() == "ex1t" {
