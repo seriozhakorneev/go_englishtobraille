@@ -10,7 +10,7 @@ import (
 
 var tpl *template.Template
 
-func init() {tpl = template.Must(template.ParseGlob("templates/*gohtml"))}
+func init() { tpl = template.Must(template.ParseGlob("templates/*gohtml")) }
 
 var brailleMap = map[string]string{
 	"a": "a.png", "b": "b.png", "c": "c.png",
@@ -72,7 +72,7 @@ func getText(w http.ResponseWriter, r *http.Request) {
 	}
 	inputText := r.FormValue("input_s")
 
-	if TextValidator(inputText) {
+	if textValidator(inputText) {
 		http.Redirect(w, r, "/?text="+inputText, http.StatusSeeOther)
 		return
 	}
