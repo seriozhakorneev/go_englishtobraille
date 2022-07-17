@@ -10,9 +10,7 @@ import (
 
 var tpl *template.Template
 
-func init() {
-	tpl = template.Must(template.ParseGlob("templates/*gohtml"))
-}
+func init() {tpl = template.Must(template.ParseGlob("templates/*gohtml"))}
 
 var brailleMap = map[string]string{
 	"a": "a.png", "b": "b.png", "c": "c.png",
@@ -28,9 +26,6 @@ var brailleMap = map[string]string{
 }
 
 func stringToBraille(s string) (brailleString []string) {
-
-	//brailleString := Braille{[]string{}}
-
 	for _, letter := range s {
 		// add capitalized letter symbol
 		if strings.ToUpper(string(letter)) == string(letter) && unicode.IsLetter(letter) {
@@ -43,7 +38,7 @@ func stringToBraille(s string) (brailleString []string) {
 	return
 }
 
-func TextValidator(str string) bool {
+func textValidator(str string) bool {
 	for _, charVariable := range str {
 		if (charVariable < 'a' || charVariable > 'z') &&
 			(charVariable < 'A' || charVariable > 'Z') &&
@@ -66,7 +61,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		},
 	)
 	if err != nil {
-		log.Fatalln("Failed to execute template", err)
+		log.Fatalln("Failed to execute template: ", err)
 	}
 }
 
@@ -96,6 +91,6 @@ func main() {
 
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
-		log.Fatalln("failed to ListenAndServe", err)
+		log.Fatalln("failed to ListenAndServe: ", err)
 	}
 }
