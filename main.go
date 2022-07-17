@@ -61,7 +61,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		},
 	)
 	if err != nil {
-		log.Fatalln("Failed to execute template", err)
+		log.Fatalln("Failed to execute template: ", err)
 	}
 }
 
@@ -91,6 +91,6 @@ func main() {
 
 	err := http.ListenAndServe(port, nil)
 	if err != nil {
-		log.Fatalln("failed to ListenAndServe", err)
+		log.Fatalln("failed to ListenAndServe: ", err)
 	}
 }
